@@ -23,6 +23,13 @@ const double number_of_electron = current / frequency / electron_charge;
 
 const double electric_constant = 8.854e-15; // Falad mm-1
 
+/**
+ * Get charge density at (xi, eta, zeta)
+ * @param xi horizontal coordinate parpendicular to the beam direction [mm]
+ * @param eta vertical coordinate [mm]
+ * @param zeta horizontal coordinate along the beam direction [mm]
+ * @return charge density at (xi, eta, zeta) [C/mm3]
+ */
 double ChargeDensityAt(double xi, double eta, double zeta) {
   return electron_charge * number_of_electron
     * exp(- (xi   * xi)   / (2 * sigmax * sigmax)
@@ -31,6 +38,12 @@ double ChargeDensityAt(double xi, double eta, double zeta) {
     / (2 * pow(M_PI, 1.5) * sigmax * sigmay * sigmaz);
 }
 
+/**
+ * Get electric field element at (x, y, z) from (xi, eta, zeta)
+ * @param x, y, z coordinate at which you want to calculate electric field [mm]
+ * @param xi, eta, zeta coordinate from which you want to calculate electric field [mm]
+ * @return electric field element at (x, y, z) from (xi, eta, zeta) [V/mm/mm3]
+ */
 double FieldContributionFrom(double x, double y, double z,
 			     double xi, double eta, double zeta) {
   return gamma_factor / (4 * M_PI * electric_constant)
@@ -38,21 +51,28 @@ double FieldContributionFrom(double x, double y, double z,
     / pow((gamma_factor*gamma_factor*(z-zeta)*(z-zeta) + (y-eta)*(y-eta) + (x-xi)*(x-xi)), 1.5);
 }
 
+/**
+ * Get Electric field at (x, y, z)
+ * @param x, y, z coordinate at which you want to calculate electric field
+ * @param sigma_range maximum range of gaussian which you calculate [sigma]
+ * @param number_of_cells number of cells you divide sigma_range * sigma into
+ * @return electric field at (x, y, z) [V/mm]
+ */
 double ElectricFieldAt(double x, double y, double z,
 		       double sigma_range, int number_of_cells) {
 
-  double cellx = sigma_range * sigmax / number_of_cells;
-  double celly = sigma_range * sigmay / number_of_cells;
-  double cellz = sigma_range * sigmaz / number_of_cells;
+  double cellx = sigma_range * sigmax / (double) number_of_cells;
+  double celly = sigma_range * sigmay / (double) number_of_cells;
+  double cellz = sigma_range * sigmaz / (double) number_of_cells;
   
   double electric_field = 0;
   for(int ixi = -number_of_cells; ixi < number_of_cells; ixi++) {
     for(int ieta = -number_of_cells; ieta < number_of_cells; ieta++) {
       for(int izeta = -number_of_cells; izeta < number_of_cells; izeta++) {
 	
-	double xi   = cellx * ((double)ixi   + 0.);
-	double eta  = celly * ((double)ieta  + 0.);
-	double zeta = cellz * ((double)izeta + 0.);
+	double xi   = cellx * ((double)ixi   + 0.5);
+	double eta  = celly * ((double)ieta  + 0.5);
+	double zeta = cellz * ((double)izeta + 0.5);
 	electric_field += FieldContributionFrom(x, y, z, xi, eta, zeta)
 	  * (cellx * celly * cellz);
 #ifdef DEBUG
@@ -67,6 +87,7 @@ double ElectricFieldAt(double x, double y, double z,
   return electric_field;
 }
 
+// main function
 int main(int argc, char** argv) {
   if (argc != 3) {
     cerr << "Usage : " << argv[0]
@@ -82,7 +103,7 @@ int main(int argc, char** argv) {
   cerr << output_file_name << endl;
   ofstream ofs(output_file_name);
 
-  double sigma_range = atoi(argv[1]);
+  double sigma_range = atof(argv[1]);
   int number_of_cells = atoi(argv[2]);
 
   double x = 5. * sigmax;
@@ -90,11 +111,11 @@ int main(int argc, char** argv) {
   double z;
 
   cout << "Loop start!" << endl;
-  for(int it = -100; it < 100; it++) { // mm (time * beta)
+  for(int it = -99; it < 100; it++) { // mm (time * beta)
 #ifdef DEBUG
     cerr <<  it << " [mm]";
 #endif
-    z = (double)it;
+    z = (double) it;
     ofs << it << "\t" << ElectricFieldAt(x, y, z, sigma_range, number_of_cells) << endl;
   }
 
