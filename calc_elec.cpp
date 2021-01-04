@@ -70,9 +70,9 @@ double ElectricFieldAt(double x, double y, double z,
     for(int ieta = -number_of_cells; ieta < number_of_cells; ieta++) {
       for(int izeta = -number_of_cells; izeta < number_of_cells; izeta++) {
 	
-	double xi   = cellx * ((double)ixi   + 0.5);
-	double eta  = celly * ((double)ieta  + 0.5);
-	double zeta = cellz * ((double)izeta + 0.5);
+	double xi   = cellx * ((double)ixi   + 0.);
+	double eta  = celly * ((double)ieta  + 0.);
+	double zeta = cellz * ((double)izeta + 0.);
 	electric_field += FieldContributionFrom(x, y, z, xi, eta, zeta)
 	  * (cellx * celly * cellz);
 #ifdef DEBUG
@@ -111,6 +111,7 @@ int main(int argc, char** argv) {
   double z;
 
   cout << "Loop start!" << endl;
+
   for(int it = -99; it < 100; it++) { // mm (time * beta)
 #ifdef DEBUG
     cerr <<  it << " [mm]";
@@ -118,7 +119,7 @@ int main(int argc, char** argv) {
     z = (double) it;
     ofs << it << "\t" << ElectricFieldAt(x, y, z, sigma_range, number_of_cells) << endl;
   }
-
+  
   cout << "Finish!!" << endl;
   exit(0);
 }
