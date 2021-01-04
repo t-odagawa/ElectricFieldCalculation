@@ -4,4 +4,7 @@
 calc_elec
 
 *.txt
+*.aux
+*.log
+*.synctex.gz
 .DS_Store
