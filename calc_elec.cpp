@@ -76,9 +76,11 @@ double ElectricFieldAt(double x, double y, double z,
 	electric_field += FieldContributionFrom(x, y, z, xi, eta, zeta)
 	  * (cellx * celly * cellz);
 #ifdef DEBUG
-	cout << xi << " " << eta << " " << zeta << endl;
-	cout << FieldContributionFrom(x,y,z,xi,eta,zeta) * (cellx * celly * cellz) << endl;
-	cout << electric_field << endl;	
+	cout << "xi = " << xi
+	     << ", eta = " << eta
+	     << ", zeta = " << zeta << endl;
+	cout << "add field value: " << FieldContributionFrom(x,y,z,xi,eta,zeta) * (cellx * celly * cellz) << endl;
+	cout << "to electric field and the result : " << electric_field << endl;	
 #endif
       }
     }
