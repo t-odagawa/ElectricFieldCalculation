@@ -1,0 +1,71 @@
+\documentclass{jsarticle}
+
+\usepackage{amsmath}
+
+\begin{document}
+
+PF-AR のパラメータは以下の通り
+\begin{table}[h]
+\centering
+\caption{PF-AR パラメータ一覧\label{tab:pfarparameter}}
+\begin{tabular}{cc} \hline
+$\sigma_x$ & $2.6~\mathrm{mm}$ \\ 
+$\sigma_y$ & $0.16~\mathrm{mm}$ \\ 
+$\sigma_z$ & $20~\mathrm{mm}$ \\ 
+$q_\mathrm{b}$ & $60~\mathrm{mA}/508.6~\mathrm{MHz} = 1.2 \times 10^{-13}~\mathrm{C}$ \\
+$\gamma$ & $6.5~\mathrm{GeV}/511~\mathrm{keV} \sim 12720$ \\ \hline
+\end{tabular}
+\end{table}
+
+坂中さんの博士論文にあるようにバンチを $z$ 方向に一様，$x,\,y$ 方向にガウシアンで分布していると思うと，
+\begin{equation}
+E_x = \frac{q_\mathrm{b} \cdot x}{2\pi \epsilon_0 l_\mathrm{b}\sigma_y(\sigma_x + \sigma_y)}.
+\end{equation}
+
+ただし，ここで$l_\mathrm{b}$ はバンチのz 方向の大きさのスケールである．
+これに各値を代入すると，$E_x$ として$\sim 62400~[\mathrm{V}] /l_\mathrm{b}~[\mathrm{mm}]$ が得られる．
+$l_\mathrm{b}$ は$\sigma_z$ の大きさ程度であると考えられるので，結果として数~MV/m という値が得られ，これがワイヤの位置が感じる$x$ 方向の電場の最大値であると考えられる．
+(ワイヤとバンチが最も近づいたときが最大とする)
+
+次に，バンチが3 次元ガウシアンに従って分布している場合を考える．
+このとき
+\begin{equation}
+E_x = \frac{\gamma}{4\pi\epsilon_0}\frac{q_\mathrm{b}}{2\pi^{3/2}\sigma_x\sigma_y\sigma_z}\iiint_{-\infty}^\infty\frac{(x - \xi)\exp[-\xi^2/(2\sigma_x^2)-\eta^2/(2\sigma_y^2)-\zeta^2/(2\sigma_z^2)]}{[\gamma^2(z-\zeta)^2 + (x - \xi)^2 + (y - \eta)^2]^{3/2}}d\xi d\eta d\zeta.
+\end{equation}
+これを各$(5\sigma_x, 0, z)$ で計算(しようと)しているのがcalc\_elec である．
+
+\newpage
+
+二次元ラプラス方程式を極座標表示で解くと，その一般解は
+\begin{equation}
+U(r, \theta) = (A_0\theta + B_0)(C_0\log r + D_0)  + \sum_{n = 1}^\infty (A_n\cos n\theta + B_n\sin n\theta)(C_n r^n + D_n r^{-n}).
+\end{equation}
+
+ワイヤの半径を$a$, 誘電率を$\epsilon = \epsilon_r \epsilon_0$ とする (導体の場合は$\epsilon_r\to\infty$ とすればよい)．
+電場は$x$ 方向にかかっており，バンチのすすむ方向を$y$ 方向としたときに$\theta$ が反時計回りに増加する座標を以降考える．
+
+一様電場$E_0$ (前ページの$E_x$) による電位は遠方で$\phi_\infty = -E_0r\cos\theta$.
+ワイヤ外の電位$\phi_o$ はワイヤ内と$\theta$ によらず連続であることと無限遠で$\phi_\infty$ となることから$\phi_o = -E_0(r + \beta/r)\cos\theta$ (ただし，$\beta$ はある定数).
+
+ワイヤ内での電位$\phi_i$ は一般解のうち，まず$\theta$ によらず$\phi_i(a,\theta) = \phi_o(a,\theta)$ が成り立つ必要があるので
+\begin{equation}
+\phi_i = A\cos\theta (Cr + \frac{D}{r}).
+\end{equation}
+さらに$r\to 0$ で電位が有限であることから$\phi_i = -E_0r\alpha\cos\theta$ (ただし，$\alpha$ はある定数).
+
+
+このとき，$\phi_i(a,\theta) = \phi_o(i,\theta)$, $\epsilon_r\partial_r\phi_i(a, \theta) = \partial_r\phi_o(a, \theta)$ を解くと，
+\begin{eqnarray}
+\alpha a^2 &=& a^2 + \beta, \\
+a^2 - \beta &=& \epsilon_r \alpha a^2.
+\end{eqnarray}
+したがって，$\alpha = 2/(1+\epsilon_r)$, $\beta = a^2(1-\epsilon_r)/(1+\epsilon_r)$ となる．
+
+\begin{eqnarray}
+\phi_i &=& - \frac{2 E_0}{1+\epsilon_r} r \cos\theta \\ 
+\phi_o &=& -E_0\left(r + \frac{a^2}{r}\frac{1-\epsilon_r}{1+\epsilon_r}\right) \cos\theta
+\end{eqnarray}
+
+ワイヤ表面における$r$ 方向の電場は$\partial\phi/\partial r\,(r = a) = -2E_0\cos\theta/(1+\epsilon_r)$, $\theta$ 方向の電場は$r^{-1}\partial\phi/\partial\theta\,(r = a) = 2E_0\sin\theta/(1+\epsilon_r)$ でその大きさは$a$ にはよらない．また，$\epsilon_r$ が大きいものを選ぶほどその絶対値は小さくなる．
+
+\end{document}
