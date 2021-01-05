@@ -2,6 +2,7 @@
 *#
 
 calc_elec
+data/
 
 *.txt
 *.aux

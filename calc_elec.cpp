@@ -98,7 +98,7 @@ int main(int argc, char** argv) {
     exit(1);
   }
 
-  string common_file_name("electric_field_");
+  string common_file_name("data/electric_field_");
   string adder("_");
   string txt_extension(".txt");
   string output_file_name  = common_file_name + argv[1]
