@@ -115,7 +115,7 @@ int main(int argc, char** argv) {
 
   cout << "Loop start!" << endl;
 
-  for(int it = -99; it < 100; it++) { // mm (time * beta)
+  for(int it = -29; it < 30; it++) { // mm (time * beta)
 #ifdef DEBUG
     cerr <<  it << " [mm]";
 #endif
