@@ -12,19 +12,19 @@ PF-AR のパラメータは以下の通り
 $\sigma_x$ & $2.6~\mathrm{mm}$ \\ 
 $\sigma_y$ & $0.16~\mathrm{mm}$ \\ 
 $\sigma_z$ & $20~\mathrm{mm}$ \\ 
-$q_\mathrm{b}$ & $60~\mathrm{mA}/508.6~\mathrm{MHz} = 1.2 \times 10^{-13}~\mathrm{C}$ \\
+$q_\mathrm{b}$ & $60~\mathrm{mA} \times 377000~\mathrm{mm}/c = 7.55 \times 10^{-8}~\mathrm{C}$ \\
 $\gamma$ & $6.5~\mathrm{GeV}/511~\mathrm{keV} \sim 12720$ \\ \hline
 \end{tabular}
 \end{table}
 
 坂中さんの博士論文にあるようにバンチを $z$ 方向に一様，$x,\,y$ 方向にガウシアンで分布していると思うと，
 \begin{equation}
-E_x = \frac{q_\mathrm{b} \cdot x}{2\pi \epsilon_0 l_\mathrm{b}\sigma_y(\sigma_x + \sigma_y)}.
+E_x = \frac{q_\mathrm{b} \cdot x}{2\pi \epsilon_0 l_\mathrm{b}\sigma_x(\sigma_x + \sigma_y)}.
 \end{equation}
 
-ただし，ここで$l_\mathrm{b}$ はバンチのz 方向の大きさのスケールである．
-これに各値を代入すると，$E_x$ として$\sim 62400~[\mathrm{V}] /l_\mathrm{b}~[\mathrm{mm}]$ が得られる．
-$l_\mathrm{b}$ は$\sigma_z$ の大きさ程度であると考えられるので，結果として数~MV/m という値が得られ，これがワイヤの位置が感じる$x$ 方向の電場の最大値であると考えられる．
+ただし，ここで$l_\mathrm{b}$ はバンチの$z$ 方向の大きさのスケールである．
+これに各値を代入すると，$E_x\,(x = 5\sigma_x)$ として$\sim 5.45 \times 10^6~[\mathrm{V}] /l_\mathrm{b}~[\mathrm{mm}]$ が得られる．
+$l_\mathrm{b}$ は$\sigma_z$ の大きさの倍程度であると考えられるので，結果として$O(0.1-1)~\mathrm{MV/m}$ という値が得られ，これがワイヤの位置が感じる$x$ 方向の電場の最大値であると考えられる．
 (ワイヤとバンチが最も近づいたときが最大とする)
 
 次に，バンチが3 次元ガウシアンに従って分布している場合を考える．
