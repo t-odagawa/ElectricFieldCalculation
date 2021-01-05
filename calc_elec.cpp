@@ -18,8 +18,9 @@ const double beta = sqrt(1. - 1. / gamma_factor / gamma_factor);
 
 const double electron_charge = 1.602e-19; // Coulomb
 const double current = 60.e-3; // A
-const double frequency = 508.6e6; // Hz
-const double number_of_electron = current / frequency / electron_charge;
+const double perimeter = 377e3; // mm
+const double speed_of_light = 2.998e11; // mm s-1
+const double number_of_electron = current * perimeter / speed_of_light / electron_charge;
 
 const double electric_constant = 8.854e-15; // Falad mm-1
 
