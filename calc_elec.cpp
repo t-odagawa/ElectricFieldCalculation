@@ -92,9 +92,9 @@ double ElectricFieldAt(double x, double y, double z,
 
 // main function
 int main(int argc, char** argv) {
-  if (argc != 3) {
+  if (argc != 4) {
     cerr << "Usage : " << argv[0]
-	 << " <sigma range> <number of cells in one dimension>" << endl;
+	 << " <sigma range> <number of cells in one dimension> <z position>" << endl;
     exit(1);
   }
 
@@ -102,8 +102,10 @@ int main(int argc, char** argv) {
   string adder("_");
   string txt_extension(".txt");
   string output_file_name  = common_file_name + argv[1]
-    + adder + argv[2] + txt_extension;
+    + adder + argv[2] + adder + argv[3] + txt_extension;
+#ifdef DEBUG
   cerr << output_file_name << endl;
+#endif
   ofstream ofs(output_file_name);
 
   double sigma_range = atof(argv[1]);
@@ -111,10 +113,12 @@ int main(int argc, char** argv) {
 
   double x = 5. * sigmax;
   double y = 0.;
-  double z;
+  double z = atof(argv[3]);
 
   cout << "Loop start!" << endl;
+  ofs << z << ElectricFieldAt(x, y, z, sigma_range, number_of_cells) << endl;
 
+  /*
   for(int it = -29; it < 30; it++) { // mm (time * beta)
 #ifdef DEBUG
     cerr <<  it << " [mm]";
@@ -122,7 +126,8 @@ int main(int argc, char** argv) {
     z = (double) it;
     ofs << it << "\t" << ElectricFieldAt(x, y, z, sigma_range, number_of_cells) << endl;
   }
-  
+  */
+
   cout << "Finish!!" << endl;
   exit(0);
 }
