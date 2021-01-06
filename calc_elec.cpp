@@ -116,17 +116,7 @@ int main(int argc, char** argv) {
   double z = atof(argv[3]);
 
   cout << "Loop start!" << endl;
-  ofs << z << ElectricFieldAt(x, y, z, sigma_range, number_of_cells) << endl;
-
-  /*
-  for(int it = -29; it < 30; it++) { // mm (time * beta)
-#ifdef DEBUG
-    cerr <<  it << " [mm]";
-#endif
-    z = (double) it;
-    ofs << it << "\t" << ElectricFieldAt(x, y, z, sigma_range, number_of_cells) << endl;
-  }
-  */
+  ofs << z << "\t" << ElectricFieldAt(x, y, z, sigma_range, number_of_cells) << endl;
 
   cout << "Finish!!" << endl;
   exit(0);
