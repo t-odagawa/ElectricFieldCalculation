@@ -1,8 +1,11 @@
-filename=./data/electric_field_3_$1.txt
-if [ -f "${filename}" ];then
-    rm -f ${filename}
+mergefilename=./data/electric_field_3_$1.txt
+if [ -f "${mergefilename}" ];then
+    rm -f ${mergefilename}
 fi
-touch ${filename}
+touch ${mergefilename}
+
 for i in `seq 0 29`;do
-    cat data/electric_field_3_$1_${i}.txt >> ${filename}
+    filename=./data/electric_field_3_$1_${i}.txt
+    cat ${filename} >> ${mergefilename}
+    rm -f ${filename}
 done
