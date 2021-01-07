@@ -32,7 +32,7 @@ $\pm \sigma_z$ の範囲にある電荷はバンチ全体の半分程度だと�
 \begin{equation}
 E_x = \frac{\gamma}{4\pi\epsilon_0}\frac{q_\mathrm{b}}{2\pi^{3/2}\sigma_x\sigma_y\sigma_z}\iiint_{-\infty}^\infty\frac{(x - \xi)\exp[-\xi^2/(2\sigma_x^2)-\eta^2/(2\sigma_y^2)-\zeta^2/(2\sigma_z^2)]}{[\gamma^2(z-\zeta)^2 + (x - \xi)^2 + (y - \eta)^2]^{3/2}}d\xi d\eta d\zeta.
 \end{equation}
-これを各$(5\sigma_x, 0, z)$ で計算(しようと)しているのがcalc\_elec である．
+これを各$(5\sigma_x, 0, z)$ で計算しているのがcalc\_elec である．
 
 \newpage
 
@@ -66,7 +66,7 @@ U(r, \theta) = (A_0\theta + B_0)(C_0\log r + D_0)  + \sum_{n = 1}^\infty (A_n\co
 \phi_o &=& -E_0\left(r + \frac{a^2}{r}\frac{1-\epsilon_r}{1+\epsilon_r}\right) \cos\theta
 \end{eqnarray}
 
-ワイヤ表面における$r$ 方向の電場は$\partial_r\phi_o\,(r = a) = -2E_0\cos\theta\epsilon_r/(1+\epsilon_r)$, $\theta$ 方向の電場は$r^{-1}\partial_\theta\phi_o\,(r = a) = 2E_0\sin\theta/(1+\epsilon_r)$ でその大きさは$a$ にはよらない．
+ワイヤ表面における$r$ 方向の電場は$-\partial_r\phi_o\,(r = a) = 2E_0\cos\theta\epsilon_r/(1+\epsilon_r)$, $\theta$ 方向の電場は$-r^{-1}\partial_\theta\phi_o\,(r = a) = -2E_0\sin\theta/(1+\epsilon_r)$ でその大きさは$a$ にはよらない．
 
 また，このとき，
 \begin{equation}
