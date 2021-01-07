@@ -1,6 +1,14 @@
 \documentclass{jsarticle}
 
 \usepackage{amsmath}
+\usepackage{listings}
+
+\lstset{
+    basicstyle={\ttfamily\small},
+    breaklines=true,
+    lineskip=-0.5ex,
+    tabsize=2
+}
 
 \begin{document}
 
@@ -33,6 +41,22 @@ $\pm \sigma_z$ の範囲にある電荷はバンチ全体の半分程度だと�
 E_x = \frac{\gamma}{4\pi\epsilon_0}\frac{q_\mathrm{b}}{2\pi^{3/2}\sigma_x\sigma_y\sigma_z}\iiint_{-\infty}^\infty\frac{(x - \xi)\exp[-\xi^2/(2\sigma_x^2)-\eta^2/(2\sigma_y^2)-\zeta^2/(2\sigma_z^2)]}{[\gamma^2(z-\zeta)^2 + (x - \xi)^2 + (y - \eta)^2]^{3/2}}d\xi d\eta d\zeta.
 \end{equation}
 これを各$(5\sigma_x, 0, z)$ で計算しているのがcalc\_elec である．
+
+\newpage
+
+calc\_elec を用いた計算結果を以下に載せる．
+計算に用いたのは$3 \sigma$ の範囲のであり，
+\begin{lstlisting}
+./calc_elec 3 <number of cells> <z position>
+\end{lstlisting}
+ただし，``number of cells" として600 から1800 まで60 刻みの値を用いた．
+また，``z position" は積分が正負で対象であることから0-30 [mm] までの値を1 mm 刻みで計算した．
+``number of cells" について60 刻みなのは，$\zeta = z$ での値を含んで計算しないと積分が正しい値にならないことによるものである．
+つまり，今回$z$ 方向について$3\sigma_z$ の範囲を``number of cells" 分割するため，$3 \times 20~\mathrm{mm} / \mathrm{number\_of\_cells} = 1/N$ (ただし$N$ はある整数) とならなくてはいけない．
+したがって，``number of cells" は60 の倍数となる必要がある．
+\begin{center}
+=====以下，計算中=====
+\end{center}
 
 \newpage
 
