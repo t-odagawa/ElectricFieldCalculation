@@ -13,7 +13,7 @@ docs/electric_field.pdf にあるような積分を考えた際に，
 
   - sigma_range: 電荷密度のガウス分布について +/- <sigma_range> * sigma の範囲を考える
   - number_of_cells: sigma_range * sigma をx/y/z それぞれの方向に <number_of_cells> 分割する
-  - z coordinate: z 座標が <z coordinate> での電場を計算する
+  - z coordinate: z 座標が < z coordinate> での電場を計算する
 
 LSF ジョブを使う場合はshell/run_calc.sh を使うことができます．
 
