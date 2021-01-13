@@ -77,11 +77,11 @@ double ElectricFieldAt(double x, double y, double z,
 	electric_field += FieldContributionFrom(x, y, z, xi, eta, zeta)
 	  * (cellx * celly * cellz);
 #ifdef DEBUG
-	cout << "xi = " << xi
-	     << ", eta = " << eta
+	cerr << "xi = "     << xi
+	     << ", eta = "  << eta
 	     << ", zeta = " << zeta << endl;
-	cout << "add field value: " << FieldContributionFrom(x,y,z,xi,eta,zeta) * (cellx * celly * cellz) << endl;
-	cout << "to electric field and the result : " << electric_field << endl;	
+	cerr << "add field value: " << FieldContributionFrom(x,y,z,xi,eta,zeta) * (cellx * celly * cellz) << endl;
+	cerr << "to electric field and the result : " << electric_field << endl;	
 #endif
       }
     }
@@ -98,11 +98,11 @@ int main(int argc, char** argv) {
     exit(1);
   }
 
-  string common_file_name("data/electric_field_");
+  string common_file_name("data/electric_field");
   string adder("_");
   string txt_extension(".txt");
-  string output_file_name  = common_file_name + argv[1]
-    + adder + argv[2] + adder + argv[3] + txt_extension;
+  string output_file_name  = common_file_name + adder
+    + argv[1] + adder + argv[2] + adder + argv[3] + txt_extension;
 #ifdef DEBUG
   cerr << output_file_name << endl;
 #endif
