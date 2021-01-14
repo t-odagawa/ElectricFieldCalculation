@@ -9,3 +9,5 @@ data/
 *.log
 *.synctex.gz
 .DS_Store
+
+test/calc_elec
