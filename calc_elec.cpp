@@ -21,7 +21,7 @@ double ChargeDensityAt(double xi, double eta, double zeta) {
     * exp(- (xi   * xi)   / (2 * sigmax * sigmax)
 	  - (eta  * eta)  / (2 * sigmay * sigmay)
 	  - (zeta * zeta) / (2 * sigmaz * sigmaz))
-    / (2 * pow(M_PI, 1.5) * sigmax * sigmay * sigmaz);
+    / (pow(2 * M_PI, 1.5) * sigmax * sigmay * sigmaz);
 }
 
 /**
