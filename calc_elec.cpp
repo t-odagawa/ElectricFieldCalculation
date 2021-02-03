@@ -49,7 +49,8 @@ double ElectricFieldAt(double x, double y, double z,
 
   double cellx = sigma_range * sigmax / (double) number_of_cells;
   double celly = sigma_range * sigmay / (double) number_of_cells;
-  double cellz = sigma_range * sigmaz / (double) number_of_cells;
+  //double cellz = sigma_range * sigmaz / (double) number_of_cells;
+  double cellz = 5. * sigmax / gamma_factor / (double) number_of_cells;
   
   double electric_field = 0;
   for(int ixi = -number_of_cells; ixi < number_of_cells; ixi++) {
@@ -83,7 +84,8 @@ int main(int argc, char** argv) {
     exit(1);
   }
 
-  string common_file_name("data/electric_field");
+  //string common_file_name("data/electric_field");
+  string common_file_name("data/finez/electric_field");
   string adder("_");
   string txt_extension(".txt");
   string output_file_name  = common_file_name + adder

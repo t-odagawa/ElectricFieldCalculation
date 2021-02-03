@@ -11,3 +11,5 @@ data/
 .DS_Store
 
 test/calc_elec
+test/data/
+test/*.sh
